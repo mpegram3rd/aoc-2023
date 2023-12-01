@@ -6,20 +6,24 @@ import (
 	"os"
 )
 
+// Interface for file processor so it can be passed around
 type IFileProcessor interface {
 	processFile()
 }
 
+// Interface for a line by line accumulator
 type IAccumulator interface {
 	processLine(string)
 	execute()
 }
 
+// File processor structure that we can hang an IFileProcessor implementation off of
 type FileProcessor struct {
 	filename    string
 	accumulator IAccumulator
 }
 
+// Opens and iterates through a file using the attached IAccumulator
 func (fp FileProcessor) processFile() {
 	// open file and check for errors
 	file, err := os.Open(fp.filename)
@@ -35,5 +39,6 @@ func (fp FileProcessor) processFile() {
 		fp.accumulator.processLine(garbIn.Text())
 	}
 
+	// Run any final processing after the file has been processed.
 	fp.accumulator.execute()
 }
