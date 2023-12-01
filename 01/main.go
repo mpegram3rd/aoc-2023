@@ -10,4 +10,8 @@ func main() {
 
 	solution1FP := FileProcessor{filename: filePath, accumulator: &Solution1Accumulator{0}}
 	solution1FP.processFile()
+
+	solution2FP := FileProcessor{filename: filePath, accumulator: &Solution2Accumulator{0}}
+	solution2FP.processFile()
+
 }

@@ -27,5 +27,5 @@ func (a *Solution1Accumulator) processLine(line string) {
 }
 
 func (a *Solution1Accumulator) execute() {
-	fmt.Println("Accumulated value: ", a.total)
+	fmt.Println("Solution 1 Accumulated value: ", a.total)
 }
