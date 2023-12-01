@@ -1,4 +1,4 @@
-package main
+package utils
 
 import (
 	"bufio"
@@ -11,22 +11,16 @@ type IFileProcessor interface {
 	processFile()
 }
 
-// Interface for a line by line accumulator
-type IAccumulator interface {
-	processLine(string)
-	execute()
-}
-
 // File processor structure that we can hang an IFileProcessor implementation off of
 type FileProcessor struct {
-	filename    string
-	accumulator IAccumulator
+	Filename    string
+	Accumulator IAccumulator
 }
 
 // Opens and iterates through a file using the attached IAccumulator
-func (fp FileProcessor) processFile() {
+func (fp FileProcessor) ProcessFile() {
 	// open file and check for errors
-	file, err := os.Open(fp.filename)
+	file, err := os.Open(fp.Filename)
 
 	defer file.Close()
 
@@ -36,9 +30,9 @@ func (fp FileProcessor) processFile() {
 
 	garbIn := bufio.NewScanner(file)
 	for garbIn.Scan() {
-		fp.accumulator.processLine(garbIn.Text())
+		fp.Accumulator.ProcessLine(garbIn.Text())
 	}
 
 	// Run any final processing after the file has been processed.
-	fp.accumulator.execute()
+	fp.Accumulator.Execute()
 }

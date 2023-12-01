@@ -39,7 +39,7 @@ type Solution2Accumulator struct {
 	total int
 }
 
-func (a *Solution2Accumulator) processLine(line string) {
+func (a *Solution2Accumulator) ProcessLine(line string) {
 	var values []ValuePosition
 
 	// Step through each value in the map and find the first and last occurence of each
@@ -68,6 +68,6 @@ func (a *Solution2Accumulator) processLine(line string) {
 	}
 }
 
-func (a *Solution2Accumulator) execute() {
+func (a *Solution2Accumulator) Execute() {
 	fmt.Println("Solution 2 Accumulated value: ", a.total)
 }

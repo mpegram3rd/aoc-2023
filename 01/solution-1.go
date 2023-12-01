@@ -13,7 +13,7 @@ type Solution1Accumulator struct {
 	total int
 }
 
-func (a *Solution1Accumulator) processLine(line string) {
+func (a *Solution1Accumulator) ProcessLine(line string) {
 	numsStr := NumsOnly.FindAllString(line, -1)
 	var nums []int
 	for _, element := range numsStr {
@@ -26,6 +26,6 @@ func (a *Solution1Accumulator) processLine(line string) {
 
 }
 
-func (a *Solution1Accumulator) execute() {
+func (a *Solution1Accumulator) Execute() {
 	fmt.Println("Solution 1 Accumulated value: ", a.total)
 }
