@@ -12,7 +12,7 @@ module.exports = (function() {
 
         // Each line in input.txt will be successively available here as `line`.
         for await (const line of rl)
-            lineProcessor(line, accumulator);
+            lineProcessor.processLine(line, accumulator);
     }
 
     return this;

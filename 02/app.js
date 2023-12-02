@@ -1,10 +1,13 @@
 const fileProcessor = require('../libs/js-libs/fileprocessor');
-const calc = require('./calc1');  // calc1 / calc2
+const lineProcessor = require('./lineprocessor');
+const solution1 = require('./solution1');  // calc1 / calc2
+const solution2 = require('./solution2');  // calc1 / calc2
 
-const accumulator = {value: 0};
-fileProcessor.process('input.txt', calc.calculator, accumulator)
+const accumulator = []
+fileProcessor.process('input.txt', lineProcessor, accumulator)
     .then(() =>  {
-        console.log(`Result ${accumulator.value}`);
+        solution1.findValidGames(accumulator);
+        solution2.findBoxesRequired(accumulator);
     })
     .catch((err) => {
         console.error(err);
