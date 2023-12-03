@@ -3,7 +3,7 @@ import utils.IAccumulator
 class Accumulator : IAccumulator {
     private var y = 0
     private var parts = ArrayList<Part>()
-    private var symbols = mutableMapOf<String, Char>()
+    private var symbols = mutableMapOf<String, Symbol>()
     private val nonSymbolSet = setOf('0','1','2','3','4','5','6','7','8','9','.')
 
     override fun processLine(line: String) {
@@ -13,8 +13,9 @@ class Accumulator : IAccumulator {
         line.toCharArray().forEach {
             // See if we found a symbol
             if (!nonSymbolSet.contains(it)) {
-                val key = "$x:$y"
-                symbols[key] = it
+                val symbol = Symbol(it, x, y)
+                val key = "" + symbol.x + ":" + symbol.y
+                symbols[key] = symbol
             }
             // check for a number
             val numCheck = it - '0'

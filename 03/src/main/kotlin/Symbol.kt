@@ -1,0 +1,1 @@
+data class Symbol (val display: Char, val x: Int, val y: Int, val adjacentParts: ArrayList<Part> = ArrayList<Part>())
