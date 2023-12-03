@@ -16,6 +16,7 @@ class FileProcessor(override val filenname: String,
                 // Process each non-null line (line?.let)
                 line?.let { accumulator.processLine(it) }
             }
+            accumulator.execute()
         } catch (e: Exception) {
             println("An error occurred: ${e.message}")
         } finally {
