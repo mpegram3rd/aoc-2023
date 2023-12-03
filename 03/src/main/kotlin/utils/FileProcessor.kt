@@ -3,13 +3,15 @@ package utils
 import java.io.BufferedReader
 import java.io.FileReader
 
-class FileProcessor(override val filenname: String,
-                    override val accumulator: IAccumulator) : IFileProcessor{
+// Needs to be moved out to a kotlin-libs project
+class FileProcessor(override val filename: String,
+                    override val accumulator: IAccumulator) : IFileProcessor {
+
     override fun processFile() {
         var reader: BufferedReader? = null
 
         try {
-            reader = BufferedReader(FileReader(filenname))
+            reader = BufferedReader(FileReader(filename))
             var line: String?
 
             while (reader.readLine().also { line = it } != null) {
