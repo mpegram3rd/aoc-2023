@@ -22,4 +22,7 @@ class Part (val partNum: Int,
         return coords
     }
 
+    override fun toString(): String {
+        return "Part# $partNum  x = $xrange, y = "+ (y + 1)
+    }
 }

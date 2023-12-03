@@ -34,16 +34,24 @@ class Accumulator : IAccumulator {
             }
             x++
         }
+        if (numVal > 0) { // Catch edge case where number is at end of line
+            parts.add(Part(numVal, xRangeStart..<x, y))
+        }
         y++
     }
 
     override fun execute() {
+        solution1()
+    }
+
+    fun solution1() {
         val total = parts.fold(0) { acc, part ->
             val isAdjacent = part.adjacencyList().fold(false) { found, coordinate ->
                 found.or(symbols.contains(coordinate))
             }
             if (isAdjacent) (acc + part.partNum) else acc
         }
-        println("Solution: $total")
+        println("Solution 1: $total")
+
     }
 }
