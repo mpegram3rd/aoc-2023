@@ -43,6 +43,7 @@ class Accumulator : IAccumulator {
 
     override fun execute() {
         solution1()
+        solution2()
     }
 
     fun solution1() {
@@ -54,5 +55,27 @@ class Accumulator : IAccumulator {
         }
         println("Solution 1: $total")
 
+    }
+
+    fun solution2() {
+        // Extract only the gears
+        val gears = symbols.filter { s -> s.value.display == '*' }
+
+        // now process each part and associate any parts that are adjacent to a gear
+        parts.forEach {p ->
+            p.adjacencyList().forEach { coord ->
+                val gear = gears[coord]
+                gear?.adjacentParts?.add(p)
+            }
+        }
+
+        // Now accumulate the sum of the gear ratios (partNum * partNum) for any gear that has exactly 2 associated parts
+        val total = gears.values.fold(0L) { acc, gear ->
+            if (gear.adjacentParts.count() == 2)
+                acc + (gear.adjacentParts[0].partNum * gear.adjacentParts[1].partNum)
+            else
+                acc
+        }
+        println("Solution 2: $total")
     }
 }
