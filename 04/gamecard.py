@@ -2,7 +2,7 @@ class GAMECARD:
 
     def __init__(self, _line):
         # Breaks up the parts of the game data from the scratch card into winning values and values to play
-        self.num = map(int, _line[4:10].strip())
+        self._num = map(int, _line[4:10].strip())
         scrubbed = _line[10:]
         game_data = scrubbed.split("|")
         self._winners = set(map(int, filter(lambda val: len(val) > 0, (game_data[0].split(" ")))))
