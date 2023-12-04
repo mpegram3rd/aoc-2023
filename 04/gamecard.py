@@ -1,13 +1,15 @@
 class GAMECARD:
 
     def __init__(self, _line):
+        # Split the card number and the game data
+        parts = _line.split(":")
+        self._num = map(int, parts[0][4:].strip())
+
         # Breaks up the parts of the game data from the scratch card into winning values and values to play
-        self._num = map(int, _line[4:10].strip())
-        scrubbed = _line[10:]
-        game_data = scrubbed.split("|")
+        game_data = parts[1].split("|")
         self._winners = set(map(int, filter(lambda val: len(val) > 0, (game_data[0].split(" ")))))
         self._plays = list(map(int, filter(lambda val: len(val) > 0, (game_data[1].split(" ")))))
-        self._count = 1 # how many copies do we have
+        self._count = 1  # how many copies do we have
 
     # Figures out how many winning matches we have
     def wins(self):
@@ -23,8 +25,8 @@ class GAMECARD:
         return 0 if wins == 0 else 1 << (wins - 1)
 
     # Increase the number of copies of the card
-    def increment(self):
-        self._count = self._count + 1
+    def increment(self, _value):
+        self._count = self._count + _value
 
     # report the number of copies of the card
     def how_many(self):
