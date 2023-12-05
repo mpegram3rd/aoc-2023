@@ -8,6 +8,7 @@ public class RangeMap {
     private final String from, to;
     private long minKey, maxKey;
     private List<Range> ranges;
+    private Range lastMatch;
 
     public RangeMap(String from, String to) {
         this.from = from;
@@ -40,16 +41,26 @@ public class RangeMap {
             if (r.getSrcLast() > maxKey)
                 maxKey = r.getSrcLast();
         });
+        reset();
+    }
+
+    public void reset() {
+        lastMatch = null;
     }
 
     public long mapValue(long value) {
         if (value < minKey || value > maxKey) {
             return value;
         }
+        long val = lastMatch != null ? lastMatch.findDestination(value) : -1;
+        if (val != -1)
+            return val;
         for (Range r : ranges) {
-            long val = r.findDestination(value);
-            if (val != -1)
+            val = r.findDestination(value);
+            if (val != -1) {
+                lastMatch = r;
                 return val;
+            }
         }
         return value;
     }
