@@ -79,7 +79,7 @@ public class Accumulator {
             }
         }
 
-        long endTime = System.currentTimeMillis(); // Fastest: 138430ms
+        long endTime = System.currentTimeMillis(); // Fastest: 138430ms 2min 18.43s
         System.out.println("Processing time: " + (endTime - startTime) + " ms");
         System.out.println("Solution 2 - Shortest distance is " + shortestDistance + " and took " + iterations + " iterations");
     }
