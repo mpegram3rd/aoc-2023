@@ -1,9 +1,8 @@
 class GAMECARD:
 
     def __init__(self, _line):
-        # Split the card number and the game data
+        # remove the leading "Card #:"
         parts = _line.split(":")
-        self._num = map(int, parts[0][4:].strip())
 
         # Breaks up the parts of the game data from the scratch card into winning values and values to play
         game_data = parts[1].split("|")
