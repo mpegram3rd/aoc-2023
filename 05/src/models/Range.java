@@ -2,8 +2,8 @@ package models;
 
 public class Range implements Comparable<Range> {
     private final long srcFirst;
-    private final long destFirst;
     private final long srcLast;
+    private final long destFirst;
 
     public Range(long srcFirst, long destFirst, long count) {
         this.srcFirst = srcFirst;
@@ -25,6 +25,10 @@ public class Range implements Comparable<Range> {
     }
     public long getSrcFirst() {
         return srcFirst;
+    }
+
+    public long getSrcLast() {
+        return srcLast;
     }
 
     @Override

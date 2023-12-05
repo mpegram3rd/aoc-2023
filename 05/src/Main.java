@@ -16,6 +16,8 @@ public class Main {
                 line = garbIn.readLine();
             }
             garbIn.close();
+
+            acc.optimize();
             acc.solution1();
             System.out.println();
             acc.solution2();

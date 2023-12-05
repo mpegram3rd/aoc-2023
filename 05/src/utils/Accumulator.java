@@ -31,8 +31,16 @@ public class Accumulator {
         parseRanges(line, currentRangeMap);
     }
 
+    /**
+     * Optimizes the internal data of the Range Map for more efficient processing.
+     */
+    public void optimize() {
+        mappers.values().forEach(RangeMap::optimize);
+    }
+
     public void solution1() {
         System.out.println("Processing solution 1...");
+        long startTime = System.currentTimeMillis();
         long shortestDistance = Long.MAX_VALUE;
         long iterations = 0;
         List<Long> seedVals = Arrays.stream(seedsData.trim().split(" "))
@@ -44,13 +52,15 @@ public class Accumulator {
             shortestDistance = Math.min(distance, shortestDistance);
             iterations++;
         }
-
+        long endTime = System.currentTimeMillis();
+        System.out.println("Processing time: " + (endTime - startTime));
         System.out.println("Solution 1 - Shortest distance is " + shortestDistance + " and took " + iterations + " iterations");
     }
 
     // TODO should be able to fold the meat of this into a single method that sol1 and 2 can use
     public void solution2() {
         System.out.println("Processing solution 2...");
+        long startTime = System.currentTimeMillis();
         long shortestDistance = Long.MAX_VALUE;
         long iterations = 0;
 
@@ -69,6 +79,8 @@ public class Accumulator {
             }
         }
 
+        long endTime = System.currentTimeMillis();
+        System.out.println("Processing time: " + (endTime - startTime));
         System.out.println("Solution 2 - Shortest distance is " + shortestDistance + " and took " + iterations + " iterations");
     }
 
