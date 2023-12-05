@@ -7,12 +7,12 @@ import java.util.*;
 
 public class Accumulator {
 
-    private final List<Long> seeds;
+    private String seedsData;
     private final Map<String, RangeMap> mappers;
     private RangeMap currentRangeMap;
 
     public Accumulator() {
-        seeds = new ArrayList<>();
+        seedsData = "";
         mappers = new HashMap<>();
     }
 
@@ -32,24 +32,31 @@ public class Accumulator {
     }
 
     public void solution1() {
-
         long shortestDistance = Long.MAX_VALUE;
-        for (long seed : seeds) {
-            RangeMap lookupMap = mappers.get("seed");
-            long key = seed;
-            System.out.print("Seed " + key + ", ");
-            do {
-                key = lookupMap.mapValue(key);
-                System.out.print(lookupMap.getTo() + " " + key + ", ");
-                lookupMap = mappers.get(lookupMap.getTo());
-            } while (lookupMap != null);
-            System.out.println();
-            shortestDistance = Math.min(key, shortestDistance);
+        List<Long> seedVals = Arrays.stream(seedsData.trim().split(" "))
+                        .map(Long::parseLong)
+                        .toList();
+
+        for (long seed : seedVals) {
+            long distance = seedDistance(seed);
+            shortestDistance = Math.min(distance, shortestDistance);
         }
 
         System.out.println("Solution 1 - Shortest distance is " + shortestDistance);
     }
 
+
+    private long seedDistance(long key) {
+        RangeMap lookupMap = mappers.get("seed");
+        System.out.print("Seed " + key + ", ");
+        do {
+            key = lookupMap.mapValue(key);
+            System.out.print(lookupMap.getTo() + " " + key + ", ");
+            lookupMap = mappers.get(lookupMap.getTo());
+        } while (lookupMap != null);
+        System.out.println();
+        return key;
+    }
 
     private void parseRanges(String line, RangeMap currentRangeMap) {
         String [] parts = line.trim().split(" ");
@@ -78,10 +85,7 @@ public class Accumulator {
      */
     private void parseSeeds(String line) {
         String [] parts = line.split(":");
-        seeds.addAll(
-                Arrays.stream(parts[1].trim().split(" "))
-                        .map(Long::parseLong)
-                        .toList());
+        seedsData = parts[1].trim();
     }
 
 }
