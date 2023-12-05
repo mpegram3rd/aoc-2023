@@ -32,7 +32,9 @@ public class Accumulator {
     }
 
     public void solution1() {
+        System.out.println("Processing solution 1...");
         long shortestDistance = Long.MAX_VALUE;
+        long iterations = 0;
         List<Long> seedVals = Arrays.stream(seedsData.trim().split(" "))
                         .map(Long::parseLong)
                         .toList();
@@ -40,21 +42,47 @@ public class Accumulator {
         for (long seed : seedVals) {
             long distance = seedDistance(seed);
             shortestDistance = Math.min(distance, shortestDistance);
+            iterations++;
         }
 
-        System.out.println("Solution 1 - Shortest distance is " + shortestDistance);
+        System.out.println("Solution 1 - Shortest distance is " + shortestDistance + " and took " + iterations + " iterations");
+    }
+
+    // TODO should be able to fold the meat of this into a single method that sol1 and 2 can use
+    public void solution2() {
+        System.out.println("Processing solution 2...");
+        long shortestDistance = Long.MAX_VALUE;
+        long iterations = 0;
+
+        int index = 0;
+        String [] seedInfo = seedsData.trim().split(" ");
+
+        while (index < seedInfo.length) {
+            long start = Long.parseLong(seedInfo[index]);
+            long end = start + Long.parseLong(seedInfo[index + 1]) - 1;
+            System.out.println("  - Processing Seed range: " + start+ " - " +  end);
+            index = index + 2;
+            for (long seed = start; seed <= end; seed++) {
+                long distance = seedDistance(seed);
+                shortestDistance = Math.min(distance, shortestDistance);
+                iterations++;
+            }
+        }
+
+        System.out.println("Solution 2 - Shortest distance is " + shortestDistance + " and took " + iterations + " iterations");
     }
 
 
     private long seedDistance(long key) {
         RangeMap lookupMap = mappers.get("seed");
-        System.out.print("Seed " + key + ", ");
+//        System.out.print("Seed " + key + ", ");
+
         do {
             key = lookupMap.mapValue(key);
-            System.out.print(lookupMap.getTo() + " " + key + ", ");
+//            System.out.print(lookupMap.getTo() + " " + key + ", ");
             lookupMap = mappers.get(lookupMap.getTo());
         } while (lookupMap != null);
-        System.out.println();
+//        System.out.println();
         return key;
     }
 

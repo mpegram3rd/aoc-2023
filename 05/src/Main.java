@@ -17,6 +17,8 @@ public class Main {
             }
             garbIn.close();
             acc.solution1();
+            System.out.println();
+            acc.solution2();
         }
         catch (IOException ex) {
             ex.printStackTrace();
