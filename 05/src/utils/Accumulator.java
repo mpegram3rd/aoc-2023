@@ -75,14 +75,11 @@ public class Accumulator {
 
     private long seedDistance(long key) {
         RangeMap lookupMap = mappers.get("seed");
-//        System.out.print("Seed " + key + ", ");
 
         do {
             key = lookupMap.mapValue(key);
-//            System.out.print(lookupMap.getTo() + " " + key + ", ");
             lookupMap = mappers.get(lookupMap.getTo());
         } while (lookupMap != null);
-//        System.out.println();
         return key;
     }
 
