@@ -53,7 +53,7 @@ public class Accumulator {
             iterations++;
         }
         long endTime = System.currentTimeMillis();
-        System.out.println("Processing time: " + (endTime - startTime));
+        System.out.println("Processing time: " + (endTime - startTime) + " ms");
         System.out.println("Solution 1 - Shortest distance is " + shortestDistance + " and took " + iterations + " iterations");
     }
 
@@ -80,7 +80,7 @@ public class Accumulator {
         }
 
         long endTime = System.currentTimeMillis();
-        System.out.println("Processing time: " + (endTime - startTime));
+        System.out.println("Processing time: " + (endTime - startTime) + " ms");
         System.out.println("Solution 2 - Shortest distance is " + shortestDistance + " and took " + iterations + " iterations");
     }
 
