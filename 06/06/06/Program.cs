@@ -11,7 +11,6 @@ process(new long[]{56977793}, new long[]{499221010971440}, 2);
 
 static void process(long[] times, long[] distances, long solutionNum)
 {
-    
     long total = 1;
     for (long idx = 0; idx < times.Length; idx++)
     {
@@ -20,6 +19,11 @@ static void process(long[] times, long[] distances, long solutionNum)
     Console.WriteLine($"Solution {solutionNum}: {total}");
 }
 
+// Strategy:
+// - Find first value that works
+// - This ends up being the same distance from the FRONT as it is from the BACK so that's your range
+// - Figure out the range length
+// NOTE: Turns out the "optimal" solution is a more simple formula that starts by using sqrt(time * time -4 * distance) 
 static long findOptions(long time, long distance)
 {
     long startVal = 2;
