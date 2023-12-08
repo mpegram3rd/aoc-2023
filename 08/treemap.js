@@ -1,3 +1,5 @@
+const { stdin, stdout } = require('node:process');
+
 // Defines a "mapped tree" Since data is loaded sequentially and may reference unknown nodes
 // the key side is the node name, and the value side holds a node with node name references for
 // each branch
@@ -30,7 +32,7 @@ module.exports = (function() {
             right: nodeParts[1].trim(),
             visitCount: 0     // Hedging my bets this is going to be needed in part 2.
         }
-        treeData.nodes[key] = node;
+        treeData.nodes.set(key, node);
 
         if (node.name === "AAA") {
             treeData.root = node
@@ -51,11 +53,16 @@ module.exports = (function() {
         while (!terminalPointFound(currentPoints)) {
             count++;
             let nextMove = treeData.moves[movePtr];
+            // stdout.write("Move: " + nextMove);
             // map current point to next node based on nextMove
             currentPoints = currentPoints.map((node) => {
-                return nextMove === 'L' ? treeData.nodes[node.left]
-                                        : treeData.nodes[node.right];
-            })
+                // stdout.write (node.name + " -> ");
+                let nextPoint =  nextMove === 'L' ? treeData.nodes.get(node.left)
+                                        : treeData.nodes.get(node.right);
+                // stdout.write(nextPoint.name + ", ");
+                return nextPoint;
+            });
+            // console.log();
 
             movePtr++;
             if (movePtr >= treeData.moves.length)
