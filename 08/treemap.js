@@ -42,20 +42,20 @@ module.exports = (function() {
         treeData.nodes.forEach((_, node) => node.visitCount = 0);
     }
 
-    this.walk = (destination) => {
+    this.walk = (startPointGenerator, terminalPointFound) => {
 
         this.reset();
         let count = 0;
         let movePtr = 0;
-        let currentNode = treeData.root;
-        while (currentNode.name !== destination) {
+        let currentPoints = startPointGenerator(treeData);
+        while (!terminalPointFound(currentPoints)) {
             count++;
             let nextMove = treeData.moves[movePtr];
-
-            currentNode = nextMove === 'L' ? treeData.nodes[currentNode.left]
-                                          : treeData.nodes[currentNode.right];
-
-            currentNode.visitCount++;
+            // map current point to next node based on nextMove
+            currentPoints = currentPoints.map((node) => {
+                return nextMove === 'L' ? treeData.nodes[node.left]
+                                        : treeData.nodes[node.right];
+            })
 
             movePtr++;
             if (movePtr >= treeData.moves.length)
