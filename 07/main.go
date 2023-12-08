@@ -12,5 +12,4 @@ func main() {
 	da := NewDataAccumulator()
 	processor := utils.FileProcessor{Filename: filePath, Accumulator: &da}
 	processor.ProcessFile()
-
 }
