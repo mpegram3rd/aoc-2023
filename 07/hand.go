@@ -100,13 +100,14 @@ func (hand *Hand) rankCards(wildcard string) int {
 	return RankMap[rankString]
 }
 
-// This is the real power player in the algorithm here's how things work
-//  1. We convert the cards string into a hexadecimal string (so we can sort them!)
+// This is the real power player in the algorithm here's how things work (using card "32T3K")
+//  1. We convert the cards string into a hexadecimal string (so we can sort them!) ("32T3K" -> "32A3D")
 //  2. We run the ranking algorithm to figure out what rank this hand is (will apply wildcards if any found)
+//     "2111" -> rank "2"
 //  3. The "rank" is added as the PREFIX to the hexadecimal string (this means sorting will make the highest ranked
-//     ones come later increasing their multiple.
-//  4. Finally, the hex string {rank}{hexadecimal-version-of-cards} can be converted to an int64
-//  5. That gives us a "sortVal" that can be used with natural integer based sorting.
+//     ones come later increasing their multiple).  (rank "2" + "32A3D" = "232A3D")
+//  4. Finally, the hex string {rank}{hexadecimal-version-of-cards} can be converted to an int64 ("232A3D" -> 2304573)
+//  5. That gives us a "sortVal" that can be used with natural integer based sorting. (sortVal = 2304573)
 func (hand *Hand) convertToHex(wildcard string, mapFunc hexMapFunc) {
 	hexCards := mapFunc(hand.cards)
 	hexCards = strconv.Itoa(hand.rankCards(wildcard)) + hexCards
