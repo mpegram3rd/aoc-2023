@@ -20,7 +20,7 @@ module.exports = (function() {
 
     // Parses a node
     this.addNode = (line) => {
-        // line looks like "xyz = (abc, def"
+        // line looks like "xyz = (abc, def)"
         let keyValueParts = line.split('=');
         let key = keyValueParts[0].trim();   // this should give "xyz" and " (abc, def)"
 
