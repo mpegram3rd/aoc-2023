@@ -16,10 +16,9 @@ fileProcessor.process('input.txt', lineProcessor, treeMap)
 // Exit criteria is that the node(s) are all "ZZZ"
 function solution1(treeMap) {
     let moves = treeMap.walk(
-        (tree) => { return [tree.root]; },  // start point generator
-        (nodes) => {   // terminal point checker all nodes must meet the condition.
-            return nodes.reduce((result, node) => result && node.name === "ZZZ", true);
-        });
+        (tree) => [tree.root],  // start point generator
+        (node) => node.name === "ZZZ"  // termination point logic
+    );
     console.log("Solution 1: "+ moves);
 }
 
@@ -28,15 +27,15 @@ function solution1(treeMap) {
 function solution2(treeMap) {
     let moves = treeMap.walk(
         (tree) => {
+            // logic for finding all starting points
             let startNodes = [];
             tree.nodes.forEach((node, key) => {
                 if (key.endsWith("A"))
                     startNodes.push(node);
             });
             return startNodes;
-        },  // start point generator
-        (nodes) => {   // terminal point checker all nodes must meet the condition.
-            return nodes.reduce((result, node) => result && node.name.endsWith("Z"), true);
-        });
+        },
+        (node) => node.name.endsWith("Z")  // termination point logic
+    );
     console.log("Solution 2: "+ moves);
 }
