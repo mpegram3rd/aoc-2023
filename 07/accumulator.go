@@ -46,7 +46,7 @@ func (da *DataAccumulator) solution(title string, wildcard string, solHexMap hex
 	fmt.Printf("%s Accumulated value: %d \n4", title, total)
 }
 
-// Using functional approach ... pass in one of these 2 functions as hand to hex mapper
+// Using functional approach ... pass in one of these 2 functions to hand as the hex mapper
 type hexMapFunc func(string) string
 
 func sol1HexMapper(cards string) string {

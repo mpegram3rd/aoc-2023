@@ -84,11 +84,11 @@ func (hand *Hand) rankCards(wildcard string) int {
 		return counts[x] > counts[y]
 	})
 
-	// add wildcard tally to highest counts value to increase ranking of the hand
+	// add wildcard tally to the highest count value to increase ranking of the hand
 	if len(counts) > 0 {
 		counts[0] = counts[0] + wildcounts
 	} else {
-		counts = append(counts, wildcounts)
+		counts = append(counts, wildcounts) // Special case if they are all wildcards
 	}
 
 	// now reassemble the counts into a string, so we can look up the ranks
@@ -100,7 +100,8 @@ func (hand *Hand) rankCards(wildcard string) int {
 	return RankMap[rankString]
 }
 
-// This is the real power player in the algorithm here's how things work (using card "32T3K")
+// This is the real power player in the algorithm.
+// Here's how things work using card "32T3K"
 //  1. We convert the cards string into a hexadecimal string (so we can sort them!) ("32T3K" -> "32A3D")
 //  2. We run the ranking algorithm to figure out what rank this hand is (will apply wildcards if any found)
 //     "2111" -> rank "2"
