@@ -8,25 +8,20 @@ class Accumulator : IAccumulator {
     }
 
     override fun execute() {
-        solution1()
-        solution2()
+        solve(1) { next, seq -> next + seq[seq.size - 1] }
+        solve(2) { next, seq -> seq[0] - next }
     }
 
-    fun solution1() {
-        val total = sequences.fold(0) { acc, sequence ->
-            acc + findNext(sequence)
+    private fun solve(num: Int, edgeLambda:(Int, IntArray) -> Int) {
+        val total = this.sequences.fold(0) { acc, sequence ->
+            acc + findEdge(sequence, edgeLambda)
         }
 
-        println("Solution 1: $total")
-    }
-
-    fun solution2() {
-        var total = 0
-        println("Solution 2: $total")
+        println("Solution $num: $total")
     }
 
     // Recursively reduce the sequence until its all 0's then tally up the edge
-    fun findNext(sequence: IntArray): Int {
+    private fun findEdge(sequence: IntArray, getEdgeValue: (Int, IntArray) -> Int): Int {
         var nextVal = 0
 
         // if we haven't hit all 0's reduce the sequence and call recursively again
@@ -41,7 +36,7 @@ class Accumulator : IAccumulator {
                 previous = num
             }
             // the next value is whatever the "nextVal" in the next reduce set + the edge value of this set.
-            nextVal = findNext(diffs.toIntArray()) + sequence[sequence.size - 1]
+            nextVal =  getEdgeValue(findEdge(diffs.toIntArray(), getEdgeValue), sequence)
         }
 
         return nextVal
