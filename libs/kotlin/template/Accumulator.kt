@@ -1,7 +1,7 @@
 import utils.IAccumulator
 
 class Accumulator : IAccumulator {
-    private var sequences  = ArrayList<IntArray>()
+
     override fun processLine(line: String) {
     }
 
@@ -11,12 +11,12 @@ class Accumulator : IAccumulator {
     }
 
     fun solution1() {
-        var total = 0;
+        var total = 0
         println("Solution 1: $total")
     }
 
     fun solution2() {
-        var total = 0;
+        var total = 0
         println("Solution 2: $total")
     }
 }
