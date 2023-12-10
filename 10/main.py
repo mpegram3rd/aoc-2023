@@ -73,7 +73,7 @@ def measure_pipe(col, row, entry_direction):
         remove_non_connected_elements()
     return distance
 
-sys.setrecursionlimit(20000)
+sys.setrecursionlimit(20000)  # there's a non-recursive way to handle this, but recursion took less time for me to do
 file1 = open("input.txt", 'r')
 Lines = file1.readlines()
 
