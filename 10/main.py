@@ -103,5 +103,6 @@ loop_length = measure_pipe(start_col, start_row, initial_direction)
 print("Loop distance = ", loop_length)
 print("Solution 1 is:", (loop_length/ 2))
 
+# Solution 2 I think needs the shoelace algo, but today's been too long a day to tackle that.
 
 
